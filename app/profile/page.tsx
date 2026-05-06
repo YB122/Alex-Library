@@ -82,7 +82,39 @@ export default function page() {
 
   return (
     <div className="container py-8">
-      <h1 className="mb-8 text-3xl font-bold">My Borrowed Books</h1>
+      {/* User Information Section */}
+      <div className="mb-8 rounded-lg border bg-card p-6">
+        <h1 className="mb-6 text-3xl font-bold">My Profile</h1>
+        <div className="grid gap-4 md:grid-cols-2">
+          <div>
+            <h2 className="mb-4 text-xl font-semibold">User Information</h2>
+            <div className="space-y-2">
+              <p>
+                <strong>Name:</strong> {(userData?.name as string) ?? "N/A"}
+              </p>
+              <p>
+                <strong>Email:</strong> {(userData?.email as string) ?? "N/A"}
+              </p>
+            </div>
+          </div>
+          <div>
+            <h2 className="mb-4 text-xl font-semibold">Account Summary</h2>
+            <div className="space-y-2">
+              <p>
+                <strong>Total Books Borrowed:</strong> {transactions.length}
+              </p>
+
+              <p>
+                <strong>Returned Books:</strong>{" "}
+                {transactions.filter((t) => t.status === "returned").length}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Borrowed Books Section */}
+      <h2 className="mb-6 text-2xl font-bold">My Borrowed Books</h2>
 
       {transactions.length === 0 ? (
         <div className="py-12 text-center">

@@ -3,6 +3,8 @@
 import { createContext, useEffect, useState, ReactNode } from "react"
 
 interface UserData {
+  name?: string
+  email?: string
   [key: string]: unknown
 }
 
