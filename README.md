@@ -218,6 +218,22 @@ If you encounter any issues or have questions:
 2. Create a new issue with detailed information
 3. Include screenshots and error messages when applicable
 
+## 🔗 Related Projects
+
+### Backend & API
+
+- **Backend Code**: [https://github.com/YB122/Library](https://github.com/YB122/Library)
+
+### Admin Dashboard
+
+- **Admin Dashboard Code**: [https://github.com/YB122/admin-library-react](https://github.com/YB122/admin-library-react)
+- **Admin Dashboard Demo**: [https://library-alex.vercel.app/](https://library-alex.vercel.app/)
+
+### Frontend Library
+
+- **Alex Library Code**: [https://github.com/YB122/Alex-Library](https://github.com/YB122/Alex-Library)
+- **Live Demo**: [https://alex-library-next.vercel.app/](https://alex-library-next.vercel.app/)
+
 ## 🌟 Acknowledgments
 
 - Built with [Next.js](https://nextjs.org/)
