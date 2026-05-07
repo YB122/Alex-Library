@@ -160,12 +160,12 @@ const Navbar1 = ({
               <>
                 <HoverCard>
                   <HoverCardTrigger asChild>
-                    <Link href="/profile">
-                      <Button variant="outline" size="sm">
+                    <Button asChild variant="outline" size="sm">
+                      <Link href="/profile">
                         <UserCircle className="mr-2 size-4" />
                         Profile
-                      </Button>
-                    </Link>
+                      </Link>
+                    </Button>
                   </HoverCardTrigger>
                   <HoverCardContent align="end" className="w-72">
                     <div className="flex flex-col gap-3">

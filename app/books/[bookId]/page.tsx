@@ -69,6 +69,7 @@ export default function Page() {
   )
 
   useEffect(() => {
+    console.log(process.env.NEXT_PUBLIC_API_BASE_URL, bookId)
     if (userRole && userToken && userData) {
       const loadBook = async () => {
         try {
