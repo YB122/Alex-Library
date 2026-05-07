@@ -37,7 +37,7 @@ export default function RootLayout({
         inter.variable
       )}
     >
-      <body>
+      <body suppressHydrationWarning>
         <UserProvider>
           <ThemeProvider>
             <div className="fixed inset-0 -z-10">
