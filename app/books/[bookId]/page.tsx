@@ -34,6 +34,7 @@ const fetchBook = async (
 
     const response = await axios.get(
       `https://alex-library-next.vercel.app/api/books/${bookId}`,
+      // `http://localhost:3000/api/books/${bookId}`,
       {
         headers: {
           Authorization: `${userRole} ${userToken}`,
@@ -41,7 +42,7 @@ const fetchBook = async (
       }
     )
 
-    console.log(response.data)
+    console.log(response.data, "smsjjsjsjsjssj")
     return response.data
   } catch (error) {
     if (error && typeof error === "object" && "response" in error) {
