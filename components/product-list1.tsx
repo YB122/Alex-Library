@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/card"
 import { cn, getApiUrl } from "@/lib/utils"
 import axios from "axios"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { Star, Search, Filter, ArrowUpDown } from "lucide-react"
 import { useContext } from "react"
 import { User } from "@/contexts/UserContext"
@@ -211,15 +211,9 @@ const ProductList1 = ({ className }: ProductList1Props) => {
 }
 
 const BookCard = ({ book }: { book: Book }) => {
-  const router = useRouter()
-
-  const handleClick = () => {
-    router.push(`/books/${book._id}`)
-  }
-
   return (
-    <div
-      onClick={handleClick}
+    <Link
+      href={`/books/${book._id}`}
       className="block h-full w-full max-w-md cursor-pointer transition-opacity hover:opacity-80"
     >
       <Card className="h-full overflow-hidden p-0">
@@ -287,7 +281,7 @@ const BookCard = ({ book }: { book: Book }) => {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </Link>
   )
 }
 

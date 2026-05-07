@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Camera, Pause, Play, Star } from "lucide-react"
 import axios from "axios"
-import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { getApiUrl } from "@/lib/utils"
 
 // ---------------------------------------------------------------------------
@@ -39,15 +39,9 @@ const fetchBooks = async (): Promise<Book[]> => {
 // BookCard
 // ---------------------------------------------------------------------------
 function BookCard({ book }: { book: Book }) {
-  const router = useRouter()
-
-  const handleClick = () => {
-    router.push(`/books/${book._id}`)
-  }
-
   return (
-    <div
-      onClick={handleClick}
+    <Link
+      href={`/books/${book._id}`}
       className="group relative w-52 flex-shrink-0 cursor-pointer overflow-hidden rounded-2xl border border-white/40 bg-white/60 shadow-md backdrop-blur-sm transition-transform duration-300 hover:scale-[1.02] sm:w-60 md:w-64 dark:border-white/10 dark:bg-white/10"
     >
       {/* Book image */}
@@ -93,7 +87,7 @@ function BookCard({ book }: { book: Book }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
