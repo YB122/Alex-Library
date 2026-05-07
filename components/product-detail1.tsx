@@ -169,6 +169,8 @@ const ProductDetail1 = ({ className, book }: ProductDetail1Props) => {
   }
   const { userToken, userRole, userData } = userContext
   const router = useRouter()
+  console.log(book.'book')
+  console.log(book._id,'book id')
 
   const handleBorrow = async () => {
     if (!book || !userToken || !userRole || !userData) {
