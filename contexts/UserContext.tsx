@@ -15,6 +15,7 @@ interface UserContextType {
   setUserData: (data: UserData | null) => void
   userRole: string | null
   setUserRole: (role: string | null) => void
+  isHydrated: boolean
 }
 
 export const User = createContext<UserContextType | undefined>(undefined)
@@ -50,6 +51,14 @@ export default function UserProvider({ children }: UserProviderProps) {
     }
     return null
   })
+
+  const [isHydrated, setIsHydrated] = useState(() => {
+    if (typeof globalThis.window !== "undefined") {
+      return true
+    }
+    return false
+  })
+
   useEffect(() => {
     if (typeof globalThis.window !== "undefined") {
       if (userToken) {
@@ -91,6 +100,7 @@ export default function UserProvider({ children }: UserProviderProps) {
         setUserData,
         userRole,
         setUserRole,
+        isHydrated,
       }}
     >
       {children}

@@ -93,7 +93,7 @@ const Navbar1 = ({
 }: Navbar1Props) => {
   const router = useRouter()
   const userContext = useContext(User)
-  const isLoggedIn = !!userContext?.userToken
+  const isLoggedIn = !!userContext?.userToken && userContext?.isHydrated
   const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   const handleSignOut = () => {

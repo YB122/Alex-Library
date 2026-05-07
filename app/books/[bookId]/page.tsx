@@ -33,8 +33,8 @@ const fetchBook = async (
     const userRole = userContext?.userRole
 
     const response = await axios.get(
-      `https://alex-library-next.vercel.app/api/books/${bookId}`,
-      // `http://localhost:3000/api/books/${bookId}`,
+      // `https://alex-library-next.vercel.app/api/books/${bookId}`,
+      `http://localhost:3000/api/books/${bookId}`,
       {
         headers: {
           Authorization: `${userRole} ${userToken}`,
