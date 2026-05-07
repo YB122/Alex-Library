@@ -1,113 +1,39 @@
-"use client"
+import { BookDetailClient } from "./BookDetailClient"
 
-import { useEffect, useState, useMemo } from "react"
-import { useParams, redirect } from "next/navigation"
-import { ProductDetail1 } from "@/components/product-detail1"
-import axios from "axios"
-import { useContext } from "react"
-import { User } from "@/contexts/UserContext"
-import { toast } from "sonner"
-import { getApiUrl } from "@/lib/utils"
-
-interface Book {
-  _id: string
-  title: string
-  author: string
-  publishedYear: number
-  availableCopies: number
-  isActiveAvailableCopies: boolean
-  isActiveAdmin: boolean
-  userId: string
-  urlImage: string
-  description: string
-  rating: number
-}
-
-const fetchBook = async (
-  bookId: string,
-  userContext: { userRole: string | null; userToken: string | null }
-): Promise<Book | null> => {
-  try {
-    // Get user token and role from context
-    const userToken = userContext?.userToken
-    const userRole = userContext?.userRole
-
-    const response = await axios.get(
-      `https://library-tan-eta.vercel.app/api/books/${bookId}`,
-      {
-        headers: {
-          Authorization: `${userRole} ${userToken}`,
-        },
-      }
-    )
-
-    console.log(response.data, "smsjjsjsjsjssj")
-    return response.data.data
-  } catch (error) {
-    if (error && typeof error === "object" && "response" in error) {
-      const axiosError = error as { response?: { status?: number } }
-      if (axiosError.response?.status === 401) {
-        toast.error("Unauthorized access")
-      }
-    }
-
-    return null
+interface PageProps {
+  params: {
+    value?: string
+    bookId?: string
+    status?: string
   }
 }
 
-export default function Page() {
-  const userContext = useContext(User)
-  const { userRole, userToken, userData } = userContext || {
-    userRole: null,
-    userToken: null,
-    userData: null,
-  }
-
-  const params = useParams()
-  const bookId = params.bookId as string
-  const [book, setBook] = useState<Book | null>(null)
-  const [loading, setLoading] = useState(true)
-  const memoizedUserContext = useMemo(
-    () => ({ userRole, userToken }),
-    [userRole, userToken]
-  )
-
-  useEffect(() => {
-    if (userRole && userToken && userData) {
-      const loadBook = async () => {
-        try {
-          const fetchedBook = await fetchBook(bookId, memoizedUserContext)
-          setBook(fetchedBook)
-        } catch (error) {
-          toast.error("Failed to load book")
-        } finally {
-          setLoading(false)
-        }
-      }
-
-      loadBook()
-    } else {
-      toast.error("You must login first")
-
-      redirect("/login")
+export default async function Page({ params }: PageProps) {
+  const resolvedParams = await params
+  console.log("Page params:", resolvedParams)
+  let bookId: string | undefined
+  if (resolvedParams?.value) {
+    console.log("params.value:", resolvedParams.value)
+    try {
+      const match = resolvedParams.value.match(/\\"bookId\\":\\"([^"]+)\\"/)
+      console.log("match:", match)
+      bookId = match ? match[1] : undefined
+    } catch (error) {
+      console.error("String parsing error:", error)
+      bookId = undefined
     }
-  }, [bookId, memoizedUserContext, userRole, userToken, userData])
+  } else {
+    bookId = resolvedParams?.bookId
+  }
+  console.log("Extracted bookId:", bookId)
 
-  if (loading) {
+  if (!bookId) {
     return (
       <div className="flex min-h-[70vh] items-center justify-center">
-        <div className="h-12 w-12 animate-spin rounded-full border-b-2 border-[#E0AAFF]" />
+        <p className="text-[#6B21A8]">Invalid book ID</p>
       </div>
     )
   }
 
-  if (!book) {
-    return (
-      <div className="flex min-h-[70vh] items-center justify-center">
-        <p className="text-[#6B21A8]">Book not found</p>
-      </div>
-    )
-  }
-
-  return <ProductDetail1 book={book} />
+  return <BookDetailClient bookId={bookId} />
 }
