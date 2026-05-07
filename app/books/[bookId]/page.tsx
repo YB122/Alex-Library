@@ -32,14 +32,11 @@ const fetchBook = async (
     const userToken = userContext?.userToken
     const userRole = userContext?.userRole
 
-    const response = await axios.get(
-      `https://library-tan-eta.vercel.app/api/books/${bookId}`,
-      {
-        headers: {
-          Authorization: `${userRole} ${userToken}`,
-        },
-      }
-    )
+    const response = await axios.get(`/api/books/${bookId}`, {
+      headers: {
+        Authorization: `${userRole} ${userToken}`,
+      },
+    })
 
     return response.data.data
   } catch (error) {
@@ -72,7 +69,6 @@ export default function Page() {
   )
 
   useEffect(() => {
-    console.log(process.env.NEXT_PUBLIC_API_BASE_URL, bookId)
     if (userRole && userToken && userData) {
       const loadBook = async () => {
         try {

@@ -10,7 +10,7 @@ export function getApiUrl(path: string = "") {
   // Use a consistent approach to avoid hydration mismatches
   const getBaseUrl = () => {
     // Check if we're in the browser
-    if (typeof window !== "undefined") {
+    if (typeof globalThis.window !== "undefined") {
       return process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
     }
     // Server-side fallback
@@ -18,8 +18,5 @@ export function getApiUrl(path: string = "") {
   }
 
   const baseUrl = getBaseUrl()
-  console.log(`${baseUrl}${path}`)
-  console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
-
   return `${baseUrl}${path}`
 }
