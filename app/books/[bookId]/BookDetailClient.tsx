@@ -76,6 +76,11 @@ export function BookDetailClient({ bookId }: BookDetailClientProps) {
   )
 
   useEffect(() => {
+    console.log(
+      process.env.NEXT_PUBLIC_API_BASE_URL,
+      "NEXT_PUBLIC_API_BASE_URL"
+    )
+    console.log(bookId, "bookId")
     if (userRole && userToken && userData) {
       const loadBook = async () => {
         try {
