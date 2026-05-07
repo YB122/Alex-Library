@@ -62,6 +62,7 @@ export default function Page() {
   const handleBookClick = (bookId: string) => {
     router.push(`/books/${bookId}`)
   }
+  console.log(process.env.NEXT_PUBLIC_API_BASE_URL, "aaaaaaaaaaaaaaaa")
 
   return (
     <div>
