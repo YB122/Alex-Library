@@ -36,7 +36,7 @@ const fetchBook = async (
     const userToken = userContext?.userToken
     const userRole = userContext?.userRole
 
-    const apiUrl = `https://library-tan-eta.vercel.app/api/books/${bookId}`
+    const apiUrl = `/api/books/${bookId}`
     console.log("Making API call to:", apiUrl)
 
     const response = await axios.get(apiUrl, {
