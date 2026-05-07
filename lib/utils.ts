@@ -7,8 +7,17 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function getApiUrl(path: string = "") {
-  const baseUrl =
-    process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+  // Use a consistent approach to avoid hydration mismatches
+  const getBaseUrl = () => {
+    // Check if we're in the browser
+    if (typeof window !== "undefined") {
+      return process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000"
+    }
+    // Server-side fallback
+    return "http://localhost:5000"
+  }
+
+  const baseUrl = getBaseUrl()
   console.log(`${baseUrl}${path}`)
   console.log(process.env.NEXT_PUBLIC_API_BASE_URL)
 
